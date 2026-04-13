@@ -1,5 +1,5 @@
 {
-  "system_api_access_token": "74068d79349655949c6f82dceec7d042",
+  "system_api_access_token": "YOUR_SYSTEM_API_ACCESS_TOKEN",
   "systematic_api_base_url": "https://api.bridgedataoutput.com/api/v2/zestimates_v2/zestimates",
   "llm_model": "groq/moonshotai/kimi-k2-instruct",
   "llm_api_key": "YOUR_GROQ_API_KEY",
