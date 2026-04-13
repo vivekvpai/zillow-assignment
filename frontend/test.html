@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>Zillow API Test</h1>
+    <button onclick="testAPI()">Test API Connection</button>
+    <div id="result"></div>
+    
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <h3>Backend Health Check: ${response.ok ? 'SUCCESS' : 'FAILED'}</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+                // Now test the actual API
+                const zestimateResponse = await fetch('http://localhost:8000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: 'What is the Zestimate for 2501 Canterbury Ln E #215, Seattle, WA 98112?' })
+                });
+                
+                const zestimateData = await zestimateResponse.json();
+                
+                resultDiv.innerHTML += `
+                    <h3>Zestimate API Test: ${zestimateResponse.ok ? 'SUCCESS' : 'FAILED'}</h3>
+                    <pre>${JSON.stringify(zestimateData, null, 2)}</pre>
+                `;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<h3>Error: ${error.message}</h3>`;
+            }
+        }
+    </script>
+</body>
+</html>
