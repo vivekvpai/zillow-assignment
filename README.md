@@ -4,6 +4,10 @@ A production-grade Python REST API agent that uses AI-powered query parsing to f
 
 ## Demo
 
+[![Watch Demo Video!](demo_thumbnail.png)](Zillow%20AI%20Chat%20-%20Google%20Chrome%202026-04-13%2016-12-11.mp4)
+
+*Click the image above to play the demo video. (Local HTML previewers can also use the player below)*
+
 <video src="Zillow AI Chat - Google Chrome 2026-04-13 16-12-11.mp4" width="100%" controls></video>
 
 ## Features
