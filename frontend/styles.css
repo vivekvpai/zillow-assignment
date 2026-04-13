@@ -73,7 +73,7 @@ body {
 
 .message {
     max-width: 80%;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .user-message {

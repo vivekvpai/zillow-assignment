@@ -119,7 +119,9 @@ class ZillowChatBot {
                 // Add conversational response if available
                 if (response.conversational_response) {
                     const conversationalDiv = document.createElement('div');
-                    conversationalDiv.innerHTML = `<p>${this.formatConversationalResponse(response.conversational_response)}</p>`;
+                    const conversationalP = document.createElement('p');
+                    conversationalP.textContent = response.conversational_response;
+                    conversationalDiv.appendChild(conversationalP);
                     contentDiv.appendChild(conversationalDiv);
                 }
             } else {
@@ -173,10 +175,7 @@ class ZillowChatBot {
         return card;
     }
     
-    formatConversationalResponse(response) {
-        // Convert markdown-style bold text to HTML
-        return response.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    }
+    // formatConversationalResponse removed — using textContent for XSS safety
     
     addErrorMessage(errorMessage) {
         const messageDiv = document.createElement('div');
@@ -187,7 +186,7 @@ class ZillowChatBot {
         
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-message';
-        errorDiv.innerHTML = `<strong>Error:</strong> ${errorMessage}`;
+        errorDiv.textContent = `Error: ${errorMessage}`;
         contentDiv.appendChild(errorDiv);
         
         messageDiv.appendChild(contentDiv);
