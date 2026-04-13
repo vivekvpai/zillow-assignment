@@ -2,6 +2,8 @@
 
 A production-grade Python REST API agent that uses AI-powered query parsing to fetch Zillow estimates (Zestimates) for US property addresses with >=99% accuracy using the BridgeData Output API.
 
+<video src="Zillow AI Chat - Google Chrome 2026-04-13 16-12-11.mp4"></video>
+
 ## Features
 
 - **AI-Powered Query Parsing**: Uses LLM (via litellm) to parse natural language property addresses into structured search parameters
@@ -57,11 +59,13 @@ python -m venv .venv
 ### 3. Activate Virtual Environment
 
 **Windows (PowerShell):**
+
 ```bash
 .venv\Scripts\Activate.ps1
 ```
 
 **Windows (Command Prompt):**
+
 ```bash
 .venv\Scripts\activate.bat
 ```
@@ -87,6 +91,7 @@ Edit `config.json` and replace the placeholder values with your actual API crede
 ```
 
 **Configuration Fields:**
+
 - `system_api_access_token`: Your BridgeData Output API access token
 - `systematic_api_base_url`: Base URL for BridgeData API (pre-configured)
 - `llm_model`: LLM model to use with litellm (e.g., `gpt-4`, `claude-3`, `gpt-3.5-turbo`)
@@ -118,6 +123,7 @@ uvicorn zillow_agent:app --reload --host 0.0.0.0 --port 8000
 Fetches the Zestimate for a given property address.
 
 **Request Body:**
+
 ```json
 {
   "query": "123 Main St, San Francisco, CA 94102"
@@ -125,6 +131,7 @@ Fetches the Zestimate for a given property address.
 ```
 
 **Example with curl:**
+
 ```bash
 curl -X POST "http://localhost:8000/get-zestimate" \
   -H "Content-Type: application/json" \
@@ -132,6 +139,7 @@ curl -X POST "http://localhost:8000/get-zestimate" \
 ```
 
 **Example with Python requests:**
+
 ```python
 import requests
 
@@ -144,6 +152,7 @@ print(response.json())
 ```
 
 **Success Response (200 OK):**
+
 ```json
 {
   "success": true,
@@ -153,6 +162,7 @@ print(response.json())
 ```
 
 **Error Response (400 Bad Request):**
+
 ```json
 {
   "success": false,
@@ -161,6 +171,7 @@ print(response.json())
 ```
 
 **Error Response (404 Not Found):**
+
 ```json
 {
   "success": false,
@@ -169,6 +180,7 @@ print(response.json())
 ```
 
 **Error Response (500 Internal Server Error):**
+
 ```json
 {
   "success": false,
@@ -215,6 +227,7 @@ The application handles various error scenarios:
 ### Modifying the System Prompt
 
 Edit the `system_prompt` field in `config.json` to customize how the AI parses queries. The prompt should instruct the AI to:
+
 - Parse natural language addresses
 - Extract structured search parameters
 - Return JSON in the expected format
@@ -229,6 +242,7 @@ Update the `llm_model` field in `config.json` to use a different LLM model suppo
 ### Import Errors
 
 Make sure the virtual environment is activated:
+
 ```bash
 .venv\Scripts\Activate.ps1
 ```
@@ -240,6 +254,7 @@ Verify that `config.json` exists and contains valid JSON with all required field
 ### API Connection Errors
 
 Check that:
+
 - Your API tokens are correct
 - The systematic API base URL is accessible
 - Your network connection is working
@@ -247,6 +262,7 @@ Check that:
 ### AI Parsing Errors
 
 If the AI fails to parse queries:
+
 - Check that your LLM API key is valid
 - Ensure the LLM model is available
 - Review the system prompt for clarity
@@ -263,6 +279,7 @@ For production deployment, consider:
 6. **Scaling**: Use a production ASGI server with multiple workers
 
 Example production command:
+
 ```bash
 uvicorn zillow_agent:app --workers 4 --host 0.0.0.0 --port 8000
 ```
